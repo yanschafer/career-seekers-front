@@ -15,12 +15,20 @@ import ParentCompetenciesSelection from '@/views/parent/ParentCompetenciesSelect
 import ParentMyCompetencies from '@/views/parent/ParentMyCompetencies.vue'
 import ParentAchievements from '@/views/parent/ParentAchievements.vue'
 
-// Expert views
+// Mentor views (бывшие Expert)
+import MentorDashboard from '@/views/mentors/MentorDashboard.vue'
+import MentorDashboardHome from '@/views/mentors/MentorDashboardHome.vue'
+import MentorParticipants from '@/views/mentors/MentorParticipants.vue'
+import MentorMyCertificates from '@/views/mentors/MentorMyCertificates.vue'
+import MentorParticipantsCertificates from '@/views/mentors/MentorParticipantsCertificates.vue'
+
+// Expert views (новые эксперты)
 import ExpertDashboard from '@/views/expert/ExpertDashboard.vue'
 import ExpertDashboardHome from '@/views/expert/ExpertDashboardHome.vue'
+import ExpertCompetencies from '@/views/expert/ExpertCompetencies.vue'
 import ExpertParticipants from '@/views/expert/ExpertParticipants.vue'
-import ExpertMyCertificates from '@/views/expert/ExpertMyCertificates.vue'
-import ExpertParticipantsCertificates from '@/views/expert/ExpertParticipantsCertificates.vue'
+import ExpertDocuments from '@/views/expert/ExpertDocuments.vue'
+import ExpertEvents from '@/views/expert/ExpertEvents.vue'
 
 // Curator views
 import CuratorDashboard from '@/views/curator/CuratorDashboard.vue'
@@ -95,6 +103,36 @@ const routes = [
     ]
   },
   {
+    path: '/mentor',
+    component: MentorDashboard,
+    children: [
+      {
+        path: '',
+        redirect: '/mentor/dashboard'
+      },
+      {
+        path: 'dashboard',
+        name: 'mentor-dashboard',
+        component: MentorDashboardHome
+      },
+      {
+        path: 'participants',
+        name: 'mentor-participants',
+        component: MentorParticipants
+      },
+      {
+        path: 'my-certificates',
+        name: 'mentor-my-certificates',
+        component: MentorMyCertificates
+      },
+      {
+        path: 'participants-certificates',
+        name: 'mentor-participants-certificates',
+        component: MentorParticipantsCertificates
+      }
+    ]
+  },
+  {
     path: '/expert',
     component: ExpertDashboard,
     children: [
@@ -108,19 +146,24 @@ const routes = [
         component: ExpertDashboardHome
       },
       {
-        path: 'participants',
+        path: 'competencies',
+        name: 'expert-competencies',
+        component: ExpertCompetencies
+      },
+      {
+        path: 'participants/:competencyId',
         name: 'expert-participants',
         component: ExpertParticipants
       },
       {
-        path: 'my-certificates',
-        name: 'expert-my-certificates',
-        component: ExpertMyCertificates
+        path: 'documents/:competencyId',
+        name: 'expert-documents',
+        component: ExpertDocuments
       },
       {
-        path: 'participants-certificates',
-        name: 'expert-participants-certificates',
-        component: ExpertParticipantsCertificates
+        path: 'events',
+        name: 'expert-events',
+        component: ExpertEvents
       }
     ]
   },
